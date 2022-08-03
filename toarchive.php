@@ -59,9 +59,6 @@ if ($config) {
 
 // Request arrays from the sub-plugin.
 $archivearray = $userstatuschecker->get_to_suspend();
-foreach ($archivearray as $key => $user) {
-echo "<script>console.log('lastaccess " . $user->lastaccess . " das wars im aa')</script>";
-}
 if (empty($archivearray)) {
     echo "Currently no users will be suspended by the next cronjob";
 } else {
