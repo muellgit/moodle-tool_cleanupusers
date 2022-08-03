@@ -14,17 +14,27 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
+namespace tool_cleanupusers\privacy;
+
+use core_privacy\local\metadata\null_provider;
+
 /**
- * Version details
- * @package tool_cleanupusers
- * @copyright 2016 N Herrmann
- * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * Privacy subsystem implementation for lifecycletrigger_startdatedelay.
+ *
+ * @package     lifecycletrigger_cleanupusers
+ * @copyright   2022 ISB Bayern
+ * @author      Philipp Memmel
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+class provider implements null_provider {
 
-defined('MOODLE_INTERNAL') || die();
-
-$plugin->version   = 2022080201;     // The current plugin version (Date: YYYYMMDDXX).
-$plugin->requires  = 2017051500;     // Requires 31 Moodle version.
-$plugin->component = 'tool_cleanupusers'; // Full name of the plugin (used for diagnostics).
-$plugin->release = 'v1.0-r2';
-$plugin->maturity = MATURITY_ALPHA;
+    /**
+     * Get the language string identifier with the component's language
+     * file to explain why this plugin stores no data.
+     *
+     * @return string the reason
+     */
+    public static function get_reason() : string {
+        return 'privacy:metadata';
+    }
+}

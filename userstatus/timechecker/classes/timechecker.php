@@ -42,6 +42,8 @@ class timechecker implements userstatusinterface {
     private $timesuspend;
     /** @var int seconds until a user should be deleted */
     private $timedelete;
+    /** @var string of roles to a user should not be deleted with*/
+    private $rolestoexclude;
 
     /**
      * This constructor sets timesuspend and timedelete from days to seconds.
@@ -51,6 +53,7 @@ class timechecker implements userstatusinterface {
         // Calculates days to seconds.
         $this->timesuspend = $config->suspendtime * 86400;
         $this->timedelete = $config->deletetime * 86400;
+        $this->rolestoexclude = $config->rolestoexclude; 
     }
 
     /**
@@ -62,14 +65,34 @@ class timechecker implements userstatusinterface {
      * @return array of users to suspend
      */
     public function get_to_suspend() {
+        global $DB;
         $users = $this->get_users_not_suspended_by_plugin();
         $admins = get_admins();
         $tosuspend = array();
+
+	
         foreach ($users as $key => $user) {
             if (array_key_exists($user->id, $admins)) {
                 continue;
             }
+            
+	    $select = 'userid = ' . $user->id;
+	    
+	    if($this->rolestoexclude == '') {
+	       continue;
 
+	    } else {
+	        $roles = explode(",",$this->rolestoexclude);
+	        foreach ($roles as $role){
+	    	    $select .= ' AND roleid = ' . $role;
+    	        }
+    	        $assignments = 0;
+	        $assignments = $DB->count_records_select('role_assignments', $select);
+	        if ($assignments > 0) {
+	       	    continue;
+       	        }	
+	    }
+    
             $mytimestamp = time();
             $timenotloggedin = $mytimestamp - $user->lastaccess;
             if ($timenotloggedin > $this->timesuspend) {

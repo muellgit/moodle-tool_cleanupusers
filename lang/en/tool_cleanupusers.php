@@ -36,6 +36,7 @@ $string['id'] = 'ID';
 $string['No'] = 'No';
 $string['Archived'] = 'Archived:';
 $string['Willbe'] = 'Will be:';
+$string['User'] = 'User';
 $string['Neverloggedin'] = 'User that never logged in:';
 $string['titletodelete'] = 'Delete Users';
 $string['usersdeleted'] = 'The user has been deleted.';

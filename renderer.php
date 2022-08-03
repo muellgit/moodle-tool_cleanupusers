@@ -70,7 +70,7 @@ class tool_cleanupusers_renderer extends plugin_renderer_base {
         // Renders the information for each array in a separate html table.
         $output = '';
         if (!empty($rendertoreactivate)) {
-            $output .= $this->render_table_of_users($rendertoreactivate, array(get_string('Neverloggedin', 'tool_cleanupusers'),
+            $output .= $this->render_table_of_users($rendertoreactivate, array(get_string('User', 'tool_cleanupusers'),
                 get_string('lastaccess', 'tool_cleanupusers'), get_string('Archived', 'tool_cleanupusers'),
                 get_string('Willbe', 'tool_cleanupusers')));
         }

@@ -39,7 +39,7 @@ class users_table extends \table_sql {
         $this->define_columns($columns);
 
         // Define the titles of columns to show in header.
-        $headers = array(get_string('id', 'tool_cleanupusers' ), get_string('Neverloggedin', 'tool_cleanupusers'),
+        $headers = array(get_string('id', 'tool_cleanupusers' ), get_string('User', 'tool_cleanupusers'),
         get_string('fullname'), get_string('lastaccess', 'tool_cleanupusers'));
         $this->define_headers($headers);
 
@@ -48,10 +48,10 @@ class users_table extends \table_sql {
             $idsasstring .= $user->id . ',';
         }
         $idsasstring = rtrim( $idsasstring , ',');
-        $where = 'id IN (' . $idsasstring . ')';
+        $where = '{user}.id IN (' . $idsasstring . ')';
         if ($sqlwhere != null && $sqlwhere != '') {
             $where .= ' AND ' . $sqlwhere;
         }
-        $this->set_sql('id, username, lastaccess, ' . get_all_user_name_fields(true), '{user}', $where, $param);
-    }
+        $this->set_sql('id, username, DATE_FORMAT(FROM_UNIXTIME(lastaccess), \'%Y-%m-%d %h:%m:%s\') AS lastaccess, ' . get_all_user_name_fields(true), '{user}', $where, $param); 
+   }
 }
