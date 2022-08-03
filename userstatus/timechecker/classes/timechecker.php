@@ -74,10 +74,7 @@ class timechecker implements userstatusinterface {
             }
             
 	    $select = 'userid = ' . $user->id;
-	    if($this->rolestoexclude == '') {
-	        continue;
-
-	    } else {
+	    if($this->rolestoexclude != '') {
 	        $roles = explode(",",$this->rolestoexclude);
 	        foreach ($roles as $role){
 	    	    $select .= ' AND roleid = ' . $role;
