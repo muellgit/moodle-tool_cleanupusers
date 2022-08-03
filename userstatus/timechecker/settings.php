@@ -24,7 +24,7 @@
 defined('MOODLE_INTERNAL') || die();
 
 // Included in admin/tool/cleanupusers/classes/plugininfo/userstatus.php therefore need to include global variable.
-global $CFG, $PAGE;
+global $CFG, $PAGE, $DB;
 
 if ($hassiteconfig) {
     $url = $CFG->wwwroot . '/' . $CFG->admin . '/tool/cleanupusers/timechecker/index.php';
@@ -36,4 +36,9 @@ if ($hassiteconfig) {
     $settings->add(new admin_setting_configtext('userstatus_timechecker/deletetime',
         get_string('deletetime', 'userstatus_timechecker'),
         get_string('timechecker_time_to_delete', 'userstatus_timechecker'), 365, PARAM_INT));
+    $rolestoexclude = $DB->get_records_menu('role', null, '', 'id, shortname');
+    $defaults = [];
+    $settings->add(new admin_setting_configmulticheckbox('userstatus_timechecker/rolestoexclude',
+        get_string('excludebyrole', 'userstatus_timechecker'),
+        get_string('timechecker_excludebyrole', 'userstatus_timechecker'), $defaults, $rolestoexclude));   
 }

@@ -22,6 +22,7 @@
  */
 
 $string['pluginname'] = 'Timechecker';
+$string['privacy:metadata'] = 'This subplugin does not store any personal data.';
 $string['settingsinformation'] = 'Subplugin information';
 $string['introsettingstext'] = 'In these settings, the time until suspension and the time until deletion can be defined.<br>
 The plugin does apply this to users who were changed by the plugin and users who are manually suspended or deleted.';
@@ -29,4 +30,5 @@ $string['timechecker_time_to_archive'] = 'Number of days without log in until a 
 $string['timechecker_time_to_delete'] = 'Number of days a user is suspended until s/he is deleted.';
 $string['suspendtime'] = 'Time until suspension';
 $string['deletetime'] = 'Time until deletion';
-
+$string['excludebyrole'] = 'Role for exclusion';
+$string['timechecker_excludebyrole'] = 'Users assigend to the selected roles will not be considered further within the main plugin.';
