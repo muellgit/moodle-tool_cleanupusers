@@ -32,4 +32,4 @@ $string['timechecker_time_to_delete'] = 'Number of days a user is suspended unti
 $string['suspendtime'] = 'Time until suspension';
 $string['deletetime'] = 'Time until deletion';
 $string['excludebyrole'] = 'Role for exclusion';
-
+$string['timechecker_excludebyrole'] = 'Users assigend to the selected roles will not be considered further within the main plugin.';

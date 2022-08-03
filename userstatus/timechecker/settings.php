@@ -40,5 +40,5 @@ if ($hassiteconfig) {
     $defaults = [];
     $settings->add(new admin_setting_configmulticheckbox('userstatus_timechecker/rolestoexclude',
         get_string('excludebyrole', 'userstatus_timechecker'),
-        get_string('timechecker_time_to_delete', 'userstatus_timechecker'), $defaults, $rolestoexclude));   
+        get_string('timechecker_excludebyrole', 'userstatus_timechecker'), $defaults, $rolestoexclude));   
 }

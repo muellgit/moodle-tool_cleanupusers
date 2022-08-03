@@ -79,7 +79,7 @@ class timechecker implements userstatusinterface {
 	    $select = 'userid = ' . $user->id;
 	    
 	    if($this->rolestoexclude == '') {
-	       continue;
+	        continue;
 
 	    } else {
 	        $roles = explode(",",$this->rolestoexclude);
@@ -96,7 +96,7 @@ class timechecker implements userstatusinterface {
             $mytimestamp = time();
             $timenotloggedin = $mytimestamp - $user->lastaccess;
             if ($timenotloggedin > $this->timesuspend) {
-                $informationuser = new archiveduser($user->id, $user->suspended, $user->lastaccess, $user->username,
+                $informationuser = new archiveduser($user->id, $user->suspended, $user->lastaccess, $user->username, 
                     $user->deleted);
                 $tosuspend[$key] = $informationuser;
             }
