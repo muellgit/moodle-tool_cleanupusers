@@ -68,24 +68,24 @@ class timechecker implements userstatusinterface {
         $users = $this->get_users_not_suspended_by_plugin();
         $admins = get_admins();
         $tosuspend = array();
-        foreach ($users as $user) {
+
+        foreach ($users as $key => $user) {
             if (array_key_exists($user->id, $admins)) {
                 continue;
             }
-            
-	    $select = 'userid = ' . $user->id;
+
 	    if($this->rolestoexclude != '') {
 	        $roles = explode(",",$this->rolestoexclude);
+	        $assignments = 0;
 	        foreach ($roles as $role){
-	    	    $select .= ' AND roleid = ' . $role;
-    	        }
-    	        $assignments = 0;
-	        $assignments = $DB->count_records_select('role_assignments', $select);
+  	            $select = 'userid = ' . $user->id . ' AND roleid = ' . $role;
+	            $assignments += $DB->count_records_select('role_assignments', $select);
+	        }
 	        if ($assignments > 0) {
 	       	    continue;
        	        }	
 	    }
-	    
+	
             $mytimestamp = time();
             $timenotloggedin = $mytimestamp - $user->lastaccess;
             if ($timenotloggedin > $this->timesuspend) {
